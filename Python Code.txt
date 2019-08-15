@@ -1,0 +1,29 @@
+importFiles [ "d:\\Sofia Courses\\Spark Machine Learning\\Project\\Data-UW-breast-cancer.csv" ]
+
+setupParse source_frames: ["Data-UW-breast-cancer.csv"]
+
+parseFiles
+  source_frames: ["Data-UW-breast-cancer.csv"]
+  destination_frame: "Key_Frame__Data_UW_breast_cancer1.hex"
+  parse_type: "CSV"
+  separator: 44
+  number_columns: 33
+  single_quotes: false
+  
+column_names: ["id","diagnosis","radius_mean","texture_mean","perimeter_mean","area_mean","smoothness_mean","compactness_mean","concavity_mean","concave points_mean","symmetry_mean","fractal_dimension_mean","radius_se","texture_se","perimeter_se","area_se","smoothness_se","compactness_se","concavity_se","concave points_se","symmetry_se","fractal_dimension_se","radius_worst","texture_worst","perimeter_worst","area_worst","smoothness_worst","compactness_worst","concavity_worst","concave points_worst","symmetry_worst","fractal_dimension_worst",""]
+  
+column_types: ["Numeric","Enum","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric","Numeric"]
+  delete_on_done: true
+  check_header: 1
+  chunk_size: 4194304
+getFrameSummary "Key_Frame__Data_UW_breast_cancer1.hex"
+ 
+predict frame: "Key_Frame__Data_UW_breast_cancer1.hex"
+predict model: "deeplearning-d5c35043-8929-441a-9a23-dc44b06b519f", frame: "Key_Frame__Data_UW_breast_cancer1.hex", predictions_frame: "prediction-25eae77f-7e20-4b69-bb96-34d3be5d46c5"
+
+Model built (Deep Learning)
+assist buildModel, null, training_frame: "Key_Frame__Data_UW_breast_cancer1.hex"
+buildModel 'deeplearning', {"model_id":"deeplearning-71200fbb-e034-4c01-8e3d-36ec9248b316","training_frame":"Key_Frame__Data_UW_breast_cancer1.hex","nfolds":0,"response_column":"id","ignored_columns":[],"ignore_const_cols":true,"activation":"Rectifier","hidden":[200,200],"epochs":10,"variable_importances":true,"score_each_iteration":false,"checkpoint":"","use_all_factor_levels":true,"standardize":true,"train_samples_per_iteration":-2,"adaptive_rate":true,"input_dropout_ratio":0,"l1":0,"l2":0,"loss":"Automatic","distribution":"AUTO","huber_alpha":0.9,"score_interval":5,"score_training_samples":10000,"score_duty_cycle":0.1,"stopping_rounds":5,"stopping_metric":"AUTO","stopping_tolerance":0,"max_runtime_secs":0,"autoencoder":false,"categorical_encoding":"AUTO","pretrained_autoencoder":"","overwrite_with_best_model":true,"target_ratio_comm_to_comp":0.05,"seed":-1,"rho":0.99,"epsilon":1e-8,"nesterov_accelerated_gradient":true,"max_w2":3.4028235e+38,"initial_weight_distribution":"UniformAdaptive","regression_stop":0.000001,"diagnostics":true,"fast_mode":true,"force_load_balance":true,"single_node_mode":false,"shuffle_training_data":false,"missing_values_handling":"MeanImputation","quiet_mode":false,"sparse":false,"col_major":false,"average_activation":0,"sparsity_beta":0,"max_categorical_features":2147483647,"reproducible":false,"export_weights_and_biases":false,"mini_batch_size":1,"elastic_averaging":false}
+getModel "deeplearning-71200fbb-e034-4c01-8e3d-36ec9248b316"
+ 
+ 
